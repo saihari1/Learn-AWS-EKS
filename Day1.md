@@ -4,7 +4,7 @@
 
 ```bash
 # Create Cluster
-eksctl create cluster --name=amcdemo \
+eksctl create cluster --name=skillzverse \
                       --region=us-east-1 \
                       --zones=us-east-1a,us-east-1b \
                       --without-nodegroup                  
@@ -29,7 +29,7 @@ eksctl utils associate-iam-oidc-provider \
 # Replace with region & cluster name
 eksctl utils associate-iam-oidc-provider \
     --region us-east-1 \
-    --cluster amcdemo \
+    --cluster skillzverse \
     --approve
 ```
 
@@ -43,16 +43,16 @@ These add-ons will create the respective IAM policies for us automatically withi
 
 ```bash
 # Create Public Node Group   
-eksctl create nodegroup --cluster=amcdemo \
+eksctl create nodegroup --cluster=skillzverse \
                        --region=us-east-1 \
-                       --name=amcdemo-ng-public1 \
-                       --node-type=t3.medium \
+                       --name=skillzverse-ng-public1 \
+                       --node-type=t2.small \
                        --nodes=2 \
                        --nodes-min=2 \
-                       --nodes-max=4 \
-                       --node-volume-size=20 \
+                       --nodes-max=3 \
+                       --node-volume-size=10 \
                        --ssh-access \
-                       --ssh-public-key=amc-demo \
+                       --ssh-public-key=skilltechera \
                        --managed \
                        --asg-access \
                        --external-dns-access \
@@ -85,17 +85,17 @@ eksctl get clusters
 
 # Capture Node Group name
 eksctl get nodegroup --cluster=<clusterName>
-eksctl get nodegroup --cluster=amcdemo
+eksctl get nodegroup --cluster=skillzverse
 
 # Delete Node Group
 eksctl delete nodegroup --cluster=<clusterName> --name=<nodegroupName>
-eksctl delete nodegroup --cluster=amcdemo --name=amcdemo-ng-public
+eksctl delete nodegroup --cluster=amcdemo --name=skillzverse-ng-public
 ```
 
 ## Step 07: Delete Cluster
 ```bash
 # Delete Cluster
 eksctl delete cluster <clusterName>
-eksctl delete cluster amcdemo
+eksctl delete cluster skillzverse
 ```
 
